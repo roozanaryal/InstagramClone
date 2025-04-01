@@ -24,22 +24,47 @@ const userSchema = new mongoose.Schema(
          type: String,
          required: true,
       },
-      role: {
-         type: String,
-         default: "user",
-      },
-      photo: {
+      profilePicture: {
          type: String,
          default: "default.png",
       },
       bio: {
          type: String,
-         default: "I am a new user",
+         default: "",
       },
       isVerified: {
          type: Boolean,
          default: false,
       },
+      gender: {
+         type: String,
+         enum: ["male", "female"],
+         default: "male",
+      },
+      follwers: [
+         {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+         },
+      ],
+      following: [
+         {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+         },
+      ],
+      posts: [
+         {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+         },
+      ],
+      savedPosts: [
+         {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+         },
+      ],
    },
    { timestamps: true }
 );
